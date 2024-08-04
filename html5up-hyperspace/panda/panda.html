@@ -1,0 +1,126 @@
+<!doctype html>
+<!--
+    Amazing html website by the famous Nea.
+-->
+<html>
+    <head>
+        <title>poopoohead</title>
+        <style>
+        
+        span{ color: white;
+            background-color: #00c5d6;
+            font-size: 40px;
+        }
+        body{
+            background-color: #5cb16b;
+            background-size:300px auto;
+            background-repeat: repeat;
+            font-family: Arial;  
+            text-align: center;
+        }
+        p{
+            color:#ffffff;
+            font-size:50px;
+            padding: 10px;
+            margin:10px;
+            border: 10px groove blue;
+        }
+
+        table, th, td{
+            color:#ffffff;
+            border: 5px solid yellow;
+            border-collapse: collapse;
+            font-size: 20px;
+            padding: 5px; 
+            background-color: black;
+            margin: 10px auto;
+        }
+        button{
+            background-color: pink;
+            font-size: 30px;
+            padding: 10px;
+            margin: 30px auto;
+        }
+        </style>
+        <script type = "text/javascript">
+            var season = 0;
+            function changeSeasonButton (){
+                season = season + 1;
+                if(season === 4) {
+                    season = 0
+                }
+
+                if(season === 0) {
+                  document.body.style.backgroundImage = "url(../images/summer.jpg)"; 
+                  document.getElementById('hiDer').innerHTML = "Hello Summer"; 
+                }
+                if(season === 1){
+                    document.body.style.backgroundImage = "url(../images/fall.jpg)";
+                    document.getElementById('hiDer').innerHTML = "Hello Fall";
+                }
+                if(season === 2){
+                    document.body.style.backgroundImage = "url(../images/winter.jpg)";
+                    document.getElementById('hiDer').innerHTML = "Hello Winter";
+                    document.getElementById('hiDer').style.color = "black";
+                }
+                if(season === 3){
+                    document.body.style.backgroundImage = "url(../images/spring.jpg)";
+
+                    document.getElementById('hiDer').innerHTML = "Hello Spring";
+                    // here set the color to white, it'll stay white until season is 3
+                    document.getElementById('hiDer').style.color = "white";
+                } 
+                
+            }
+        </script>
+    </head>
+
+
+    <body> 
+        <span> Panda-monium </span>
+
+        <p id = "hiDer"> Hello </p>
+        <a href="#" onclick="changeSeasonButton();"> 
+                <img src = "../images/panda.jpg" 
+                alt = ":(" width = "50%" height = "auto"/>
+        </a> 
+
+        <button style="display:block;" onclick = "changeSeasonButton()">
+            Change the season! 
+        </button>
+        <table id="pandaTable">
+            <tr>
+                <th>Panda Name</th>
+                <th>Portrait</th>
+                <th>Cuteness Level</th>
+                <th>Amt of Fluff</th>
+            </tr>
+            <tr>
+                <td>Bobby</td>
+                <td><img src = "../images/bobby.jpg" width = "250px" height = "auto"/></td>
+                <td>6</td>
+                <td>34 floof</td>
+            </tr>
+            <tr>
+                <td>Panda McPandaface</td>
+                <td><img src = "../images/panda2.jpg" width = "250px" height = "auto" /></td>
+                <td>8.3</td>
+                <td>40</td>
+            </tr>
+            <tr>
+                <td>Charlene</td>
+                <td><img src = "../images/panda3.jpg" width = "250px" height = "auto" /></td>
+                <td>7</td>
+                <td>1000</td>
+            </tr>
+            <tr>
+                <td>Francis</td>
+                <td><img src = "../images/floof.jpg" width = "250px" height = "auto" /></td>
+                <td>$1000000</td>
+                <td>very</td>
+            </tr>
+        </table>
+    </body>
+
+</html>
+

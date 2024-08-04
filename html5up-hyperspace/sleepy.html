@@ -1,0 +1,212 @@
+<!DOCTYPE HTML>
+<!--
+	Hyperspace by HTML5 UP
+	html5up.net | @ajlkn
+	Free for personal and commercial use under the CCA 3.0 license (html5up.net/license)
+	Originally from: https://html5up.net/hyperspace
+	Modified for entertainment and learning purposes.
+-->
+<html>
+
+<head>
+	<title>Sleepy</title>
+	<meta charset="utf-8" />
+	<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
+	<link rel="stylesheet" href="assets/css/main.css" />
+	<noscript>
+		<link rel="stylesheet" href="assets/css/noscript.css" />
+	</noscript>
+
+	<style>
+		/* Center the image in the viewport */
+		.rotating-image {
+			width: 200px;
+			height: auto;
+			animation: rotate 25s linear infinite;
+		}
+		.rotating-image-2 {
+			width: 200px;
+			height: auto;
+			animation: rotate 3s linear infinite;
+		}
+
+		#skewTarget {
+			transition: transform 1s;
+		}
+
+		@keyframes rotate {
+			from {
+				transform: rotate(0deg);
+			}
+
+			to {
+				transform: rotate(360deg);
+			}
+		}
+	</style>
+
+</head>
+
+<body class="is-preload">
+
+	<!-- Header -->
+	<header id="header">
+		<a href="index.html" class="title">Sleep time</a>
+		<nav>
+			<ul>
+				<li><a href="index.html">Home</a></li>
+				<li><a href="sleepy.html" class="active">Sleepy</a></li>
+				<li><a href="game.html">Game?</a></li>
+			</ul>
+		</nav>
+	</header>
+
+	<!-- Wrapper -->
+	<div id="wrapper">
+
+		<!-- Main -->
+		<section id="main" class="wrapper skewed">
+			<div class="inner">
+				<h1 class="major">getting sleepy? <button id="yes-button"
+						onclick="generateRandomShapes()">yes?</button><button id="no-button"
+						onclick="skewit()">no??</button></h1>
+				<div id="skewTarget">
+					<p>getting sleepy....</p>
+					<canvas id="shapesCanvas" width="100%" height="30%" class="rotating-image image fit "></canvas>
+					<p>getting sleepy....</p>
+					<a onclick="spinFaster()">
+						<p id="sleepytext">getting sleepier...</p>
+						<img id="spiral" src="images/spiral.png" alt="Rotating Image" class="rotating-image-2">
+					</a>
+					<p id="sleepytext2">getting sleepy....</p>
+				</div>
+			</div>
+			<script>
+				let skewAmount = 0;
+				function skewit() {
+					const yesButton = document.getElementById('yes-button');
+					const noButton = document.getElementById('no-button');
+					const target = document.getElementById('skewTarget');
+
+					skewAmount -= 3; 
+					target.style.transform = `skew(${skewAmount}deg)`;
+				}
+
+				let spinTime = 3;
+				let spinSize = 200;
+				function spinFaster() {
+					const spiral = document.getElementById('spiral');
+					spinTime = spinTime / 1.25;
+					duration = Math.max(0.01, spinTime);
+					spiral.style.animation = `rotate ${duration}s linear infinite`;
+					spinSize = spinSize * 1.05;
+					spiral.style.width = `${spinSize}px`;
+
+					if (spinTime <= 0.1) {
+						spinTime = 10;
+						const text1 = document.getElementById('sleepytext');
+						const text2 = document.getElementById('sleepytext2');
+						text1.textContent = 'TOO SLEEPY!!';
+						text2.textContent = 'TOO SLEEPY!!';
+						text1.style.fontSize = `x-large`;
+						text2.style.fontSize = `xx-large`;
+						alert("too sleepy!");
+					}
+				}
+
+				// Function to generate random shapes
+				function generateRandomShapes() {
+					skewAmount += 3; 
+					// const sleepytext = document.getElementById('skewTarget');
+					// sleepytext.textContent = "getting sleepy..." + ".".repeat(skewAmount);
+
+					const canvas = document.getElementById('shapesCanvas');
+					const ctx = canvas.getContext('2d');
+					const width = canvas.width;
+					const height = canvas.height;
+
+					// Clear the canvas
+					ctx.clearRect(0, 0, width, height);
+
+					// Define the number of shapes to draw
+					const numberOfShapes = 20;
+
+					// Function to get a random integer between min and max (inclusive)
+					function getRandomInt(min, max) {
+						return Math.floor(Math.random() * (max - min + 1)) + min;
+					}
+
+					// Function to generate a random color
+					function getRandomColor() {
+						const r = getRandomInt(0, 255);
+						const g = getRandomInt(0, 255);
+						const b = getRandomInt(0, 255);
+						return `rgb(${r}, ${g}, ${b})`;
+					}
+
+					// Draw random shapes
+					for (let i = 0; i < numberOfShapes; i++) {
+						const shapeType = getRandomInt(0, 2); // 0 = circle, 1 = rectangle, 2 = line
+						const x = getRandomInt(0, width);
+						const y = getRandomInt(0, height);
+						const size = getRandomInt(20, 100);
+						const color = getRandomColor();
+
+						ctx.fillStyle = color;
+						ctx.strokeStyle = color;
+						ctx.lineWidth = 2;
+
+						switch (shapeType) {
+							case 0: // Draw a circle
+								ctx.beginPath();
+								ctx.arc(x, y, size / 2, 0, Math.PI * 2);
+								ctx.fill();
+								break;
+							case 1: // Draw a rectangle
+								ctx.fillRect(x, y, size, size);
+								break;
+							case 2: // Draw a line
+								const x2 = getRandomInt(0, width);
+								const y2 = getRandomInt(0, height);
+								ctx.beginPath();
+								ctx.moveTo(x, y);
+								ctx.lineTo(x2, y2);
+								ctx.stroke();
+								break;
+						}
+					}
+				}
+
+				window.onload=generateRandomShapes;
+
+				function spin_faster() {
+
+				}
+			</script>
+
+		</section>
+
+	</div>
+
+	<!-- Footer -->
+	<footer id="footer" class="wrapper style1-alt">
+		<div class="inner">
+			<ul class="menu">
+				<li>so copyright</li>
+				<li>so cool</li>
+			</ul>
+		</div>
+	</footer>
+
+	<!-- Scripts -->
+	<script src="assets/js/jquery.min.js"></script>
+	<script src="assets/js/jquery.scrollex.min.js"></script>
+	<script src="assets/js/jquery.scrolly.min.js"></script>
+	<script src="assets/js/browser.min.js"></script>
+	<script src="assets/js/breakpoints.min.js"></script>
+	<script src="assets/js/util.js"></script>
+	<script src="assets/js/main.js"></script>
+
+</body>
+
+</html>
