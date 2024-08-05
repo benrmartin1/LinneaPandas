@@ -10,6 +10,10 @@
 
 <head>
 	<title>Game?</title>
+	<link rel="apple-touch-icon" sizes="180x180" href="images/favicon/apple-touch-icon.png">
+	<link rel="icon" type="image/png" sizes="32x32" href="images/favicon/favicon-32x32.png">
+	<link rel="icon" type="image/png" sizes="16x16" href="images/favicon/favicon-16x16.png">
+	<link rel="manifest" href="images/favicon/site.webmanifest">
 	<meta charset="utf-8" />
 	<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
 	<link rel="stylesheet" href="assets/css/main.css" />
@@ -23,6 +27,7 @@
 			padding: 0;
 			overflow: hidden;
 			background-color: #87CEEB;
+			text-shadow: 0 0 5px #ad42ff, 0 0 10px #cb13a3, 0 0 15px #dd10bb;
 		}
 
 		#gameArea {
@@ -48,7 +53,48 @@
 			top: 20px;
 			left: 20px;
 			font-size: 24px;
-			color: purple;
+			color: rgb(0, 0, 0);
+			text-shadow: 0 0 5px #ffffff, 0 0 10px #ffffff, 0 0 15px #ffffff;
+		}
+
+		@keyframes bounce {
+
+			0%,
+			20%,
+			50%,
+			80%,
+			100% {
+				transform: translateY(0);
+			}
+
+			40% {
+				transform: translateY(-30px);
+			}
+
+			60% {
+				transform: translateY(-15px);
+			}
+		}
+
+		.bouncy {
+			animation: bounce 2s infinite;
+		}
+
+		@keyframes typing {
+			from {
+				width: 0;
+			}
+
+			to {
+				width: 100%;
+			}
+		}
+
+		.typing {
+			overflow: hidden;
+			white-space: nowrap;
+			border-right: 2px solid #000;
+			animation: typing 10s steps(400, end) infinite;
 		}
 	</style>
 
@@ -58,7 +104,7 @@
 
 	<!-- Header -->
 	<header id="header">
-		<a href="index.html" class="title">Game time!!</a>
+		<a href="index.html" class="title bouncy">Game time!!</a>
 		<nav>
 			<ul>
 				<li><a href="index.html">Home</a></li>
@@ -74,7 +120,7 @@
 		<!-- Main -->
 		<section id="main" class="wrapper">
 			<br>
-			<input type="button" style="left: 2%; background-color: #b95dd3;" onclick="window.print();"
+			<input type="button" class=" typing" style="left: 2%; background-color: #b95dd3;" onclick="window.print();"
 				value="Proud of your score? Print it out!" />
 
 			<div id="gameArea">
@@ -85,6 +131,7 @@
 					const gameArea = document.getElementById('gameArea');
 					const scoreDisplay = document.getElementById('score');
 					let score = 0;
+					let invert = 0;
 
 					function getRandomPosition() {
 						const x = Math.floor(Math.random() * (gameArea.clientWidth - 30));
@@ -103,6 +150,11 @@
 							score++;
 							scoreDisplay.textContent = `Score: ${score}`;
 							coin.remove();
+
+							if(score % 5 == 0) {
+								invert = invert == 0 ? 1 : 0;
+								gameArea.style.filter = `invert(${invert})`;
+							}
 						});
 
 						gameArea.appendChild(coin);
